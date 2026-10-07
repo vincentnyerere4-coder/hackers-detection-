@@ -1,0 +1,40 @@
+ `</html>` 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HACKER DETECTION - Vincent</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;padding:15px}
+.box{border:2px solid #0f0;padding:15px;border-radius:10px}
+h2{text-align:center;text-shadow:0 0 10px #0f0}
+input{width:90%;padding:12px;margin:8px 0;background:#111;color:#0f0;border:1px solid #0f0;border-radius:5px}
+button{width:95%;padding:12px;background:#0f0;color:#000;font-weight:bold;border:none;border-radius:5px;margin-top:10px}
+.alert{color:red;background:#300;padding:10px;border-left:4px solid red;margin-top:10px}
+.ok{color:#0f0;background:#030;padding:10px;border-left:4px solid #0f0;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>--- VINCENT NYERERE ---<br>HACKER DETECTION</h2>
+<p>> Scanning system logs...</p>
+<input id="ip" placeholder="IP: 192.168.1.100">
+<input id="tries" type="number" placeholder="Tries: 5">
+<button onclick="scan()">START SCAN</button>
+<div id="result"></div>
+<p style="margin-top:20px;font-size:11px">Scan complete! By Vincent<br>github.com/vincentnyerere4-coder</p>
+</div>
+<script>
+function scan(){
+let ip=document.getElementById('ip').value||'192.168.1.100';
+let t=document.getElementById('tries').value||0;
+let r=document.getElementById('result');
+r.innerHTML='<p>> Analyzing '+ip+'...</p>';
+setTimeout(()=>{
+if(t>=3){r.innerHTML+=`<div class='alert'>[!] ALERT! Hacker IP: ${ip} - Tried ${t} times - BLOCK IT!</div>`}
+else{r.innerHTML+=`<div class='ok'>[+] IP ${ip} - ${t} tries - OK</div>`}
+},800);
+}
+</script>
+</body>
+</html>
