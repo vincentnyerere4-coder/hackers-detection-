@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Security Check - Vincent Nyerere</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020617;color:#e2e8f0;font-family:Arial,sans-serif;padding:15px}
+.container{max-width:500px;margin:0 auto;background:#0f172a;border-radius:15px;border:1px solid #1e40af;overflow:hidden;box-shadow:0 0 30px rgba(30,64,175,0.3)}
+.header{background:linear-gradient(135deg,#1e40af,#3b82f6);padding:20px;text-align:center;color:white}
+.header h1{font-size:22px;margin-bottom:5px}
+.header p{font-size:13px;opacity:0.9}
+.box{padding:20px}
+.item{background:#1e293b;padding:12px;margin:8px 0;border-radius:8px;border-left:4px solid #3b82f6;font-size:14px}
+.item span{color:#94a3b8;font-size:12px;display:block}
+.safe-box{background:rgba(34,197,94,0.1);border:2px solid #22c55e;border-radius:10px;padding:15px;text-align:center;margin:15px 0}
+.safe-box h2{color:#22c55e;font-size:20px}
+.map{width:100%;height:180px;border-radius:10px;border:1px solid #334155;margin:10px 0}
+.tip{background:#1e293b;padding:10px;margin:6px 0;border-radius:6px;font-size:13px}
+.tip::before{content:"✅ "}
+.btn{width:100%;padding:14px;margin:7px 0;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer}
+.btn-blue{background:#3b82f6;color:white}
+.btn-green{background:#25D366;color:white}
+.btn-dark{background:#334155;color:white}
+.footer{text-align:center;padding:15px;font-size:11px;color:#64748b;border-top:1px solid #1e293b}
+.link-box{background:#000;padding:8px;border-radius:5px;text-align:center;font-size:12px;color:#22c55e;margin:10px 0;word-break:break-all}
+</style>
+<script>
+if(window.location.search.includes('fbclid')){
+  window.history.replaceState({},document.title,window.location.pathname);
+}
+</script>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>🛡️ CYBER SECURITY CHECK</h1>
+<p>Angalia kama Simu & Facebook yako iko salama - By Vincent</p>
+</div>
+<div class="box">
+<div id="loading">⏳ Inapima usalama wako...</div>
+<div id="content" style="display:none">
+<div class="item"><span>IP Address Yako</span><b id="ip">-</b></div>
+<div class="item"><span>Location / Mahali</span><b id="loc">-</b></div>
+<div class="item"><span>Network / Mtandao</span><b id="isp">-</b></div>
+<div class="item"><span>Simu Yako</span><b id="device">-</b></div>
+<div class="safe-box">
+<h2 id="status">✅ SIMU IKO SALAMA 100%</h2>
+<p id="statusDesc" style="font-size:13px;margin-top:5px">Hakuna dalili ya VPN au Hacker. Connection yako ni ya moja kwa moja.</p>
+</div>
+<iframe id="map" class="map" frameborder="0" scrolling="no"></iframe>
+<div style="margin-top:15px">
+<h3 style="font-size:15px;margin-bottom:8px">💡 USHAURI WA KITAALAM:</h3>
+<div class="tip">Washa Two-Factor Authentication kwenye Facebook</div>
+<div class="tip">Usibonyeze link za ajabu kwenye Messenger</div>
+<div class="tip">Badilisha password yako kila miezi 3</div>
+<div class="tip">Toka (Logout) kwenye vifaa usivyovitumia</div>
+</div>
+<div class="link-box" id="shortLink">Link: vincentnyerere4-coder.github.io/hackers-detection-/</div>
+<button class="btn btn-blue" onclick="window.open('https://www.facebook.com/settings?tab=security','_blank')">🔒 WEKA 2-FACTOR SASA</button>
+<button class="btn btn-green" id="waBtn">📤 SHARE KWA WHATSAPP</button>
+<button class="btn btn-dark" id="smsBtn">💬 TUMA KWA SMS</button>
+<button class="btn btn-dark" onclick="navigator.clipboard.writeText('https://vincentnyerere4-coder.github.io/hackers-detection-/');alert('Link copied!')">🔗 COPY LINK FUPI</button>
+</div>
+</div>
+<div class="footer">Elimu ya Usalama wa Mtandaoni | Made in Dar es Salaam, Tanzania<br>Hii ni kwa ajili ya elimu tu, sio ya kuogopesha.</div>
+</div>
+<script>
+let shareText = "";
+fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{
+ document.getElementById('ip').innerText = d.ip;
+ document.getElementById('loc').innerText = d.city+", "+d.region+" - "+d.country_name;
+ document.getElementById('isp').innerText = d.org;
+ document.getElementById('device').innerText = navigator.userAgent.split(')')[0]+')';
+ document.getElementById('map').src = `https://www.openstreetmap.org/export/embed.html?bbox=${d.longitude-0.1},${d.latitude-0.1},${d.longitude+0.1},${d.latitude+0.1}&layer=mapnik&marker=${d.latitude},${d.longitude}`;
+ shareText = `🛡️ NIMEJIPIMA CYBER SECURITY CHECK%0A%0A✅ Status: SIMU IKO SALAMA 100%%0A📍 Location: ${d.city}%0A🌐 Network: ${d.org}%0A%0AJipime nawe hapa:%0Ahttps://vincentnyerere4-coder.github.io/hackers-detection-/`;
+ document.getElementById('loading').style.display='none';
+ document.getElementById('content').style.display='block';
+ document.getElementById('waBtn').onclick = ()=> window.open(`https://wa.me/?text=${shareText}`,'_blank');
+ document.getElementById('smsBtn').onclick = ()=> window.open(`sms:?&body=${shareText}`,'_blank');
+});
+</script>
+</body>
+</html>
